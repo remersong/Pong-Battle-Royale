@@ -67,6 +67,8 @@ public class Player {
             double speed = 20;
             move(dx * speed, dy * speed);
 
+
+
         }
 
 //    }

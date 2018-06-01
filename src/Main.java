@@ -2,28 +2,30 @@
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 /**
  * Created by michael_hopps on 5/4/18.
  */
-public class Main extends JPanel implements ActionListener, KeyListener{
+public class Main extends JPanel implements ActionListener, KeyListener, MouseMotionListener{
 
     private Timer timer;
     private Player player;
 
+    private Point MousePoint;
+
     private boolean[] keys;
 
     public Main(int w, int h) {
+
+        MousePoint = getMousePosition();
         setSize(w, h);
         timer = new Timer(1000/60, this);
         timer.start();
         addKeyListener(this);
         player = new Player(getWidth()/2, getHeight()/2);
         keys = new boolean[256];
+
     }
 
     //
@@ -82,5 +84,15 @@ public class Main extends JPanel implements ActionListener, KeyListener{
 
         window.add(panel);
         window.setVisible(true);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
     }
 }
