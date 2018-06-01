@@ -26,6 +26,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         keys = new boolean[256];
     }
 
+    //
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
