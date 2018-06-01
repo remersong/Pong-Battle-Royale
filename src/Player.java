@@ -15,10 +15,39 @@ public class Player {
 
     //TODO: implement using an image instead of this rect
     public void draw(Graphics2D g2){
-        g2.fillRect(x, y, 50, 50);
+
+        if(x > 1440 - 100){
+
+            x = 1340;
+        }
+
+        if(x < 0){
+
+            x = 0;
+        }
+
+        if(y < 0){
+
+            y = 0;
+        }
+
+        if(y > 800 - 100){
+
+            y = 700;
+        }
+
+        g2.setColor(Color.black);
+
+        g2.fillRect(0, 0, 1440, 800);
+
+        g2.setColor(Color.ORANGE);
+
+        g2.fillOval(x, y, 100, 100);
+
     }
 
     public void move(boolean[] keys){
+
         double dx = 0, dy = 0;
         if(keys[KeyEvent.VK_W])
             dy = -1;
@@ -33,7 +62,7 @@ public class Player {
             dy = dy / Math.sqrt(2);
             dx = dx / Math.sqrt(2);
         }
-        double speed = 5;
+        double speed = 20;
         move(dx*speed, dy*speed);
 
     }

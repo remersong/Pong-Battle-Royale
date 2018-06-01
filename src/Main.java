@@ -69,7 +69,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
 
         JFrame window = new JFrame("Dodge!");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        int w = 800;
+        int w = 1440;
         int h = 800;
         window.setBounds(0, 0, w, h + 22); //(x, y, w, h) 22 due to title bar.
 
