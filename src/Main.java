@@ -14,7 +14,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
 
     private Timer timer;
     private Player player;
-
+//
     private boolean[] keys;
 
     public Main(int w, int h) {
