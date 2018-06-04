@@ -9,32 +9,14 @@ public class Player {
     private int x, y;
 
     public Player(int x, int y) {
+
         this.x = x;
         this.y = y;
+
     }
 
     //TODO: implement using an image instead of this rect
     public void draw(Graphics2D g2){
-
-//        if(x > 1440 - 100){
-//
-//            x = 1340;
-//        }
-//
-//        if(x < 0){
-//
-//            x = 0;
-//        }
-//
-//        if(y < 0){
-//
-//            y = 0;
-//        }
-//
-//        if(y > 800 - 100){
-//
-//            y = 700;
-//        }
 
         g2.setColor(Color.black);
 
@@ -48,34 +30,38 @@ public class Player {
 
     public void move(boolean[] keys){
 
-        double dx = 0, dy = 0;
-
-//        if(x<=1440 - 100 && x>0 && y>0 && y<800-100) {
-            if (keys[KeyEvent.VK_W] && y>0)
-                dy = -1;
-            if (keys[KeyEvent.VK_S] && y<800-100)
-                dy = 1;
-            if (keys[KeyEvent.VK_A] && x>0)
-                dx = -1;
-            if (keys[KeyEvent.VK_D] && x<1440-100)
-                dx = 1;
-
-            if (dy != 0 && dx != 0) {
-                dy = dy / Math.sqrt(2);
-                dx = dx / Math.sqrt(2);
-            }
-            double speed = 20;
-            move(dx * speed, dy * speed);
-
-
+//        double dx = 0, dy = 0;
+//
+////        if(x<=1440 - 100 && x>0 && y>0 && y<800-100) {
+//            if (keys[KeyEvent.VK_W] && y>0)
+//                dy = -1;
+//            if (keys[KeyEvent.VK_S] && y<800-100)
+//                dy = 1;
+//            if (keys[KeyEvent.VK_A] && x>0)
+//                dx = -1;
+//            if (keys[KeyEvent.VK_D] && x<1440-100)
+//                dx = 1;
+//
+//            if (dy != 0 && dx != 0) {
+//                dy = dy / Math.sqrt(2);
+//                dx = dx / Math.sqrt(2);
+//            }
+//            double speed = 20;
+//            move(dx * speed, dy * speed);
 
         }
 
 //    }
 
-    public void move(double dx, double dy){
-        x += dx;
-        y += dy;
+    public void move(int MouseX, int MouseY){
+
+//        x += dx;
+//        y += dy;
+
+        x = MouseX;
+
+        y = MouseY;
+
     }
 
     public int getX() {

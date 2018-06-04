@@ -7,36 +7,46 @@ import java.awt.event.*;
 /**
  * Created by michael_hopps on 5/4/18.
  */
-public class Main extends JPanel implements ActionListener, KeyListener, MouseMotionListener{
+public class Main extends JPanel implements ActionListener, KeyListener{
 
     private Timer timer;
     private Player player;
 
-    private Point MousePoint;
+    private int MouseX=HEIGHT/2;
+    private int MouseY=WIDTH/2;
 
     private boolean[] keys;
 
-    public Main(int w, int h) {
 
-        MousePoint = getMousePosition();
+
+    public Main(int w, int h) {
         setSize(w, h);
         timer = new Timer(1000/60, this);
         timer.start();
         addKeyListener(this);
         player = new Player(getWidth()/2, getHeight()/2);
         keys = new boolean[256];
+        addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
 
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                MouseX=e.getX();
+                MouseY=e.getY();
+            }
+        });
     }
-
-    //
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        player.move(keys);
-
+        player.move(MouseX, MouseY);
 
         repaint();
+
     }
 
     @Override
@@ -64,8 +74,9 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseMo
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
-
         player.draw(g2);
+        g2.fillOval(MouseX,MouseY, 50, 50);
+
     }
 
     public static void main(String[] args) {
@@ -84,15 +95,7 @@ public class Main extends JPanel implements ActionListener, KeyListener, MouseMo
 
         window.add(panel);
         window.setVisible(true);
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
 
     }
 
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
-    }
 }
