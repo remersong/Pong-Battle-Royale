@@ -12,6 +12,7 @@ public class Player {
     public Player(int x, int y) {
 
         this.x = x;
+
         this.y = y;
 
     }
@@ -19,54 +20,36 @@ public class Player {
     //TODO: implement using an image instead of this rect
     public void draw(Graphics2D g2){
 
-
-
         g2.setColor(Color.ORANGE);
 
         g2.fillOval(x, y, 100, 100);
 
     }
 
-    public void move(boolean[] keys){
+    public void move(int MouseX, int MouseY){
 
-//        double dx = 0, dy = 0;
-//
-////        if(x<=1440 - 100 && x>0 && y>0 && y<800-100) {
-//            if (keys[KeyEvent.VK_W] && y>0)
-//                dy = -1;
-//            if (keys[KeyEvent.VK_S] && y<800-100)
-//                dy = 1;
-//            if (keys[KeyEvent.VK_A] && x>0)
-//                dx = -1;
-//            if (keys[KeyEvent.VK_D] && x<1440-100)
-//                dx = 1;
-//
-//            if (dy != 0 && dx != 0) {
-//                dy = dy / Math.sqrt(2);
-//                dx = dx / Math.sqrt(2);
-//            }
-//            double speed = 20;
-//            move(dx * speed, dy * speed);
+        if(MouseX > 720 && MouseX < 1340) {
+
+            x = MouseX;
 
         }
 
-//    }
+        if(MouseY < 700) {
 
-    public void move(int MouseX, int MouseY){
+            y = MouseY;
 
-//        x += dx;
-//        y += dy;
-
-        x = MouseX;
-
-        y = MouseY;
+        }
 
     }
 
     public Ellipse2D getBounds() {
+
         return new Ellipse2D.Float(x, y, WIDTH, HEIGHT) {
+
         };
+
     }
+
     public int getX() {
         return x;
     }

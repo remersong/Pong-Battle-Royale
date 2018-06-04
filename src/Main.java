@@ -18,7 +18,6 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     private boolean[] keys;
 
 
-
     public Main(int w, int h) {
         setSize(w, h);
         timer = new Timer(1000/60, this);
@@ -34,11 +33,14 @@ public class Main extends JPanel implements ActionListener, KeyListener{
 
             @Override
             public void mouseMoved(MouseEvent e) {
-                MouseX=e.getX();
-                MouseY=e.getY();
-            }
+
+                    MouseX = e.getX();
+                    MouseY = e.getY();
+
+                }
         });
-    }
+
+}
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -77,6 +79,12 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         g2.setColor(Color.black);
 
         g2.fillRect(0, 0, 1440, 800);
+
+        g2.setColor(Color.WHITE);
+
+        g2.setStroke(new BasicStroke(6));
+
+        g2.drawLine(720, 0, 720, 800);
 
         g2.setColor(Color.ORANGE);
         player.draw(g2);
