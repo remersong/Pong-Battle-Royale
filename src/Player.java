@@ -1,12 +1,13 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Ellipse2D;
 
 /**
  * Created by michael_hopps on 5/29/18.
  */
 public class Player {
 
-    private int x, y;
+    private int x, y, WIDTH=50, HEIGHT=50;
 
     public Player(int x, int y) {
 
@@ -64,6 +65,10 @@ public class Player {
 
     }
 
+    public Ellipse2D getBounds() {
+        return new Ellipse2D.Float(x, y, WIDTH, HEIGHT) {
+        };
+    }
     public int getX() {
         return x;
     }
