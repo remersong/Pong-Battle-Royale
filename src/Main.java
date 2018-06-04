@@ -69,7 +69,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         else
             keyEvent.consume();
     }
-
+//
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
