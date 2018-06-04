@@ -19,9 +19,7 @@ public class Player {
     //TODO: implement using an image instead of this rect
     public void draw(Graphics2D g2){
 
-        g2.setColor(Color.black);
 
-        g2.fillRect(0, 0, 1440, 800);
 
         g2.setColor(Color.ORANGE);
 

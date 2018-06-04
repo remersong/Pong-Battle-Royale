@@ -74,6 +74,11 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D)g;
+        g2.setColor(Color.black);
+
+        g2.fillRect(0, 0, 1440, 800);
+
+        g2.setColor(Color.ORANGE);
         player.draw(g2);
         g2.fillOval(MouseX,MouseY, 50, 50);
 
