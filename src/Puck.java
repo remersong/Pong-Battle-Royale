@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 public class Puck {
     private static final int Radius = 30;
-    private int x, y, Width, Height, xa = 0, ya = 0;
+    public int x, y, Width, Height, xa = 0, ya = 0;
 
     public Puck(int x, int y, int Width, int Height) {
         this.x = x;
@@ -37,8 +37,8 @@ public class Puck {
                 //collision!
                 int collisionPointX = ((x * player.getRadius()) + (player.getX() * Radius)) / (Radius + player.getRadius());
                 int collisionPointY =  ((y * player.getRadius()) + (player.getY() * Radius)) / (Radius + player.getRadius());
-                xa = (int)(xa * (Radius-player.getRadius()) + (2 * player.getRadius() * playerspeedx)) / (Radius + player.getRadius()); //use player speed x for player speed
-                ya = (int)(ya * (Radius-player.getRadius()) + (2 * player.getRadius() * playerspeedy)) / (Radius + player.getRadius()); //use player speed y for player speed
+                xa = (int)-(xa * (Radius-player.getRadius()) + (2 * player.getRadius() * playerspeedx)) / (Radius + player.getRadius()); //use player speed x for player speed
+                ya = (int)-(ya * (Radius-player.getRadius()) + (2 * player.getRadius() * playerspeedy)) / (Radius + player.getRadius()); //use player speed y for player speed
 
                 System.out.println("Collision");
             }

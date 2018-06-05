@@ -45,8 +45,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
                     points.add(new Point(MouseX, MouseY));
                     if(points.size()>20)
                         points.remove(0);
-                    playerspeedx=(int)Math.abs(points.get(0).getX() - points.get(points.size()-1).getX()) / 7;
-                    playerspeedy=(int)Math.abs(points.get(0).getY() - points.get(points.size()-1).getY()) / 7;
+                    playerspeedx=(int)(points.get(0).getX() - points.get(points.size()-1).getX()) / 7;
+                    playerspeedy=(int)(points.get(0).getY() - points.get(points.size()-1).getY()) / 7;
                 System.out.println(playerspeedx+" "+playerspeedy);
                 }
         });
@@ -60,7 +60,6 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         puck.move(player, playerspeedx, playerspeedy);
 
         repaint();
-
     }
 
     @Override
@@ -70,14 +69,21 @@ public class Main extends JPanel implements ActionListener, KeyListener{
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
+
+
         if(keyEvent.getKeyCode() < 256)
             keys[keyEvent.getKeyCode()] = true;
         else
             keyEvent.consume();
+
     }
 
     @Override
     public void keyReleased(KeyEvent keyEvent) {
+        puck.x=getWidth()/2+100;
+        puck.y=getHeight()/2;
+        puck.xa=2;
+        puck.ya=2;
         if(keyEvent.getKeyCode() < 256)
             keys[keyEvent.getKeyCode()] = false;
         else
