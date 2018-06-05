@@ -3,6 +3,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 /**
  * Created by michael_hopps on 5/4/18.
@@ -11,9 +12,11 @@ public class Main extends JPanel implements ActionListener, KeyListener{
 
     private Timer timer;
     private Player player;
-
+    private Puck puck;
     private int MouseX=HEIGHT/2;
     private int MouseY=WIDTH/2;
+    private ArrayList<Point> points= new ArrayList();
+    private int playerspeed=0;
 
     private boolean[] keys;
 
@@ -24,6 +27,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         timer.start();
         addKeyListener(this);
         player = new Player(getWidth()/2, getHeight()/2);
+        puck = new Puck(getWidth()/2, getHeight()/2, WIDTH, HEIGHT);
         keys = new boolean[256];
         addMouseMotionListener(new MouseMotionListener() {
             @Override
@@ -36,7 +40,13 @@ public class Main extends JPanel implements ActionListener, KeyListener{
 
                     MouseX = e.getX();
                     MouseY = e.getY();
-
+                    points.add(new Point(MouseX, MouseY));
+                    if(points.size()>10)
+                        points.remove(0);
+                    double dx=Math.abs(points.get(0).getX() - points.get(points.size()-1).getX());
+                    double dy=Math.abs(points.get(0).getY() - points.get(points.size()-1).getY());
+                    playerspeed=(int)(Math.sqrt(dx*dx+dy*dy));
+                System.out.println(playerspeed);
                 }
         });
 
@@ -46,6 +56,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent e) {
 
         player.move(MouseX, MouseY);
+        puck.move(player, playerspeed);
 
         repaint();
 
@@ -88,7 +99,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
 
         g2.setColor(Color.ORANGE);
         player.draw(g2);
-        g2.fillOval(MouseX,MouseY, 50, 50);
+        puck.draw(g2);
+
 
     }
 

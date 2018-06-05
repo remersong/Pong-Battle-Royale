@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
  */
 public class Player {
 
-    private int x, y, WIDTH=50, HEIGHT=50;
+    private int x, y, Radius=50;
 
     public Player(int x, int y) {
 
@@ -16,6 +16,7 @@ public class Player {
         this.y = y;
 
     }
+
 
     //TODO: implement using an image instead of this rect
     public void draw(Graphics2D g2){
@@ -27,7 +28,6 @@ public class Player {
     }
 
     public void move(int MouseX, int MouseY){
-
         if(MouseX > 720 && MouseX < 1340) {
 
             x = MouseX;
@@ -61,7 +61,7 @@ public class Player {
 
     public Ellipse2D getBounds() {
 
-        return new Ellipse2D.Float(x, y, WIDTH, HEIGHT) {
+        return new Ellipse2D.Float(x, y, Radius, Radius) {
 
         };
 
@@ -73,5 +73,8 @@ public class Player {
 
     public int getY() {
         return y;
+    }
+    public int getRadius() {
+        return Radius;
     }
 }
