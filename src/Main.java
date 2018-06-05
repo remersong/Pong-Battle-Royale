@@ -17,6 +17,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     private int MouseY=WIDTH/2;
     private ArrayList<Point> points= new ArrayList();
     private int playerspeed=0;
+    private Goal goal1, goal2;
 
     private boolean[] keys;
 
@@ -29,6 +30,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         player = new Player(getWidth()/2, getHeight()/2);
         puck = new Puck(getWidth()/2, getHeight()/2, WIDTH, HEIGHT);
         keys = new boolean[256];
+        goal1 = new Goal(-30,150, true);
+        goal2 = new Goal(1440-150, 150 , false);
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -100,6 +103,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         g2.setColor(Color.ORANGE);
         player.draw(g2);
         puck.draw(g2);
+        goal1.draw(g2);
+        goal2.draw(g2);
 
 
     }
