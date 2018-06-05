@@ -6,22 +6,53 @@ import javax.swing.JOptionPane;
 public class Puck {
     private static final int Radius = 30;
     public int x, y, Width, Height, xa = 0, ya = 0;
+    int dc;
+    int dcspeed=20;
 
     public Puck(int x, int y, int Width, int Height) {
         this.x = x;
         this.y = y;
+        this.Width=Width;
+        this.Height=Height;
 
     }
 
     public void move(Player p, int playerspeedx, int playerspeedy) {
         x += xa;
         y += ya;
+        dc++;
+        if (dc==dcspeed){
+            if (xa>0){
+                xa--;
+            }
+            else if(xa<0){
+                xa++;
+            }
+            if (ya>0){
+                ya--;
+            }
+            else if(ya<0){
+                ya++;
+            }
+            dc=0;
+        }
+        if (y < 0) {
+            y += 5;
+            ya = -ya;
+        }
+        else if (y > Height-Radius) {
+            y -= 5;
+            ya = -ya;
+        }
+        if (x < 0) {
+            x += 5;
+            xa = -xa;
+        }
+        else if (x > Width-Radius) {
+            x -= 5;
+            xa = -xa;
+        }
 
-
-//        if (y < 0 || y > Height - Radius - 29)
-//            ya = -ya;
-//        if (x < 0 || x > Width - Radius - 29)
-//            xa = -xa;
 
         checkCollision(p, playerspeedx, playerspeedy);
     }

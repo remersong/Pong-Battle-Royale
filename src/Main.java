@@ -18,6 +18,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     private ArrayList<Point> points= new ArrayList();
     private int playerspeedx=0;
     private int playerspeedy=0;
+    private int puckweight=12;
 
 
     private boolean[] keys;
@@ -29,7 +30,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         timer.start();
         addKeyListener(this);
         player = new Player(getWidth()/2, getHeight()/2);
-        puck = new Puck(getWidth()/2, getHeight()/2, WIDTH, HEIGHT);
+        puck = new Puck(getWidth()/2, getHeight()/2, getWidth(), getHeight());
         keys = new boolean[256];
         addMouseMotionListener(new MouseMotionListener() {
             @Override
@@ -45,8 +46,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
                     points.add(new Point(MouseX, MouseY));
                     if(points.size()>20)
                         points.remove(0);
-                    playerspeedx=(int)(points.get(0).getX() - points.get(points.size()-1).getX()) / 7;
-                    playerspeedy=(int)(points.get(0).getY() - points.get(points.size()-1).getY()) / 7;
+                    playerspeedx=(int)(points.get(0).getX() - points.get(points.size()-1).getX()) / puckweight;
+                    playerspeedy=(int)(points.get(0).getY() - points.get(points.size()-1).getY()) / puckweight;
                 System.out.println(playerspeedx+" "+playerspeedy);
                 }
         });
