@@ -39,5 +39,9 @@ public class Goal {
         return box.contains(ex, why);
     }
 
+    public boolean scored{
+
+    }
+
 
 }
