@@ -16,7 +16,9 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     private int MouseX=HEIGHT/2;
     private int MouseY=WIDTH/2;
     private ArrayList<Point> points= new ArrayList();
-    private int playerspeed=0;
+    private int playerspeedx=0;
+    private int playerspeedy=0;
+
 
     private boolean[] keys;
 
@@ -26,7 +28,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         timer = new Timer(1000/60, this);
         timer.start();
         addKeyListener(this);
-        player = new Player(getWidth()/2, getHeight()/2);
+        player = new Player(getWidth()/2-100, getHeight()/2-100);
         puck = new Puck(getWidth()/2, getHeight()/2, WIDTH, HEIGHT);
         keys = new boolean[256];
         addMouseMotionListener(new MouseMotionListener() {
@@ -41,12 +43,12 @@ public class Main extends JPanel implements ActionListener, KeyListener{
                     MouseX = e.getX();
                     MouseY = e.getY();
                     points.add(new Point(MouseX, MouseY));
-                    if(points.size()>10)
+                    if(points.size()>20)
                         points.remove(0);
-                    double dx=Math.abs(points.get(0).getX() - points.get(points.size()-1).getX());
-                    double dy=Math.abs(points.get(0).getY() - points.get(points.size()-1).getY());
-                    playerspeed=(int)(Math.sqrt(dx*dx+dy*dy));
-                System.out.println(playerspeed);
+                     playerspeedx=(int)Math.abs(points.get(0).getX() - points.get(points.size()-1).getX());
+                     playerspeedy=(int)Math.abs(points.get(0).getY() - points.get(points.size()-1).getY());
+
+                System.out.println(playerspeedx/7 + " " + playerspeedy/7);
                 }
         });
 
@@ -56,7 +58,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent e) {
 
         player.move(MouseX, MouseY);
-        puck.move(player, playerspeed);
+        puck.move(player, playerspeedx/7, playerspeedy/7);
 
         repaint();
 
