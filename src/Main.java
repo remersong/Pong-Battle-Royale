@@ -16,7 +16,9 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     private int MouseX=HEIGHT/2;
     private int MouseY=WIDTH/2;
     private ArrayList<Point> points= new ArrayList();
-    private int playerspeed=0;
+    private int playerspeedx=0;
+    private int playerspeedy=0;
+
 
     private boolean[] keys;
 
@@ -41,12 +43,11 @@ public class Main extends JPanel implements ActionListener, KeyListener{
                     MouseX = e.getX();
                     MouseY = e.getY();
                     points.add(new Point(MouseX, MouseY));
-                    if(points.size()>10)
+                    if(points.size()>20)
                         points.remove(0);
-                    double dx=Math.abs(points.get(0).getX() - points.get(points.size()-1).getX());
-                    double dy=Math.abs(points.get(0).getY() - points.get(points.size()-1).getY());
-                    playerspeed=(int)(Math.sqrt(dx*dx+dy*dy));
-                System.out.println(playerspeed);
+                    playerspeedx=(int)Math.abs(points.get(0).getX() - points.get(points.size()-1).getX()) / 7;
+                    playerspeedy=(intMath.abs(points.get(0).getY() - points.get(points.size()-1).getY()) / 7;
+                System.out.println(playerspeedx+" "+playerspeedy);
                 }
         });
 
@@ -56,7 +57,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent e) {
 
         player.move(MouseX, MouseY);
-        puck.move(player, playerspeed);
+        puck.move(player, playerspeedx, playerspeedy);
 
         repaint();
 
