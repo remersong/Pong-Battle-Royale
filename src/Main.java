@@ -46,7 +46,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
                     if(points.size()>20)
                         points.remove(0);
                     playerspeedx=(int)Math.abs(points.get(0).getX() - points.get(points.size()-1).getX()) / 7;
-                    playerspeedy=(intMath.abs(points.get(0).getY() - points.get(points.size()-1).getY()) / 7;
+                    playerspeedy=(int)Math.abs(points.get(0).getY() - points.get(points.size()-1).getY()) / 7;
                 System.out.println(playerspeedx+" "+playerspeedy);
                 }
         });
