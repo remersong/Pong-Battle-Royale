@@ -32,12 +32,29 @@ public class Player {
 
             x = MouseX;
 
+        } else if(MouseX < 720) {
+
+            x = 720;
+
+        } else {
+
+            x = 1340;
+
         }
 
-        if(MouseY < 700) {
+        if(MouseY < 700 && MouseY>0) {
 
             y = MouseY;
 
+        } else if(MouseY > 700){
+
+            y=700;
+
+        }
+
+        else if(MouseY<0){
+
+            y = 0;
         }
 
     }
