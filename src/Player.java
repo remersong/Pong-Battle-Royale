@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
  */
 public class Player {
 
-    private int x, y, Radius=50;
+    private int x, y, Radius=100;
 
     public Player(int x, int y) {
 
@@ -23,7 +23,7 @@ public class Player {
 
         g2.setColor(Color.ORANGE);
 
-        g2.fillOval(x, y, 100, 100);
+        g2.fillOval(x, y, Radius, Radius);
 
     }
 

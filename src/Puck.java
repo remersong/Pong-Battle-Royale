@@ -7,7 +7,9 @@ public class Puck {
     private static final int Radius = 30;
     public int x, y, Width, Height, xa = 0, ya = 0;
     int dc;
-    int dcspeed=20;
+    int friction=20;
+    int collisionPointX=0;
+    int collisionPointY=0;
 
     public Puck(int x, int y, int Width, int Height) {
         this.x = x;
@@ -21,7 +23,7 @@ public class Puck {
         x += xa;
         y += ya;
         dc++;
-        if (dc==dcspeed){
+        if (dc==friction){
             if (xa>0){
                 xa--;
             }
@@ -62,12 +64,14 @@ public class Puck {
                 && x < player.getX() + Radius + player.getRadius()
                 && y + Radius + player.getRadius() > player.getY()
                 && y < player.getY() + Radius + player.getRadius()) {
-            int distance = (int) Math.sqrt((x - player.getX()) * (x - player.getX()) + (y - player.getY()) * ((y - player.getY())));
+            int a=Math.abs(player.getX()-x);
+            int b=Math.abs(player.getY()-y);
+            int distance = (int)Math.sqrt((a*a) + (b*b));
 
-            if (distance < Radius + player.getRadius()) {
+            if (distance < (Radius + player.getRadius()) ) {
                 //collision!
-                int collisionPointX = ((x * player.getRadius()) + (player.getX() * Radius)) / (Radius + player.getRadius());
-                int collisionPointY =  ((y * player.getRadius()) + (player.getY() * Radius)) / (Radius + player.getRadius());
+                collisionPointX = ((x * player.getRadius()) + (player.getX() * Radius)) / (Radius + player.getRadius());
+                collisionPointY =  ((y * player.getRadius()) + (player.getY() * Radius)) / (Radius + player.getRadius());
                 xa = (int)-(xa * (Radius-player.getRadius()) + (2 * player.getRadius() * playerspeedx)) / (Radius + player.getRadius()); //use player speed x for player speed
                 ya = (int)-(ya * (Radius-player.getRadius()) + (2 * player.getRadius() * playerspeedy)) / (Radius + player.getRadius()); //use player speed y for player speed
 
@@ -83,5 +87,6 @@ public class Puck {
     public void draw(Graphics g) {
         g.setColor(new Color(39, 149, 186));
         g.fillOval(x, y, Radius, Radius);
+        g.fillOval(collisionPointX, collisionPointY, 5, 5);
     }
 }
