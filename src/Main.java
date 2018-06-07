@@ -20,6 +20,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     private int playerspeedy=0;
     private int puckweight=6;
     private int time=20;
+    private Goal goal1, goal2;
+
 
 
     private boolean[] keys;
@@ -116,6 +118,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         g2.setColor(Color.ORANGE);
         player.draw(g2);
         puck.draw(g2);
+        goal1.draw(g2);
+        goal2.draw(g2);
 
 
     }
