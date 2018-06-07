@@ -33,7 +33,7 @@ public class Player {
 
             x = MouseX;
 
-        } else if(MouseX < 720+Radius) {
+        } else if(MouseX < 720+Radius+1) {
 
             x = 720+Radius;
         } else {
