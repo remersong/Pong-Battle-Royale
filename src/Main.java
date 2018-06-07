@@ -35,6 +35,10 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         player = new Player(getWidth()/2, getHeight()/2);
         puck = new Puck(getWidth()/2, getHeight()/2, getWidth(), getHeight());
         keys = new boolean[256];
+        goal1 = new Goal(1440-150, 150, false);
+        goal2 = new Goal(-30, 150, true);
+
+
         addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
