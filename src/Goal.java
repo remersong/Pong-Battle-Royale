@@ -14,16 +14,15 @@ public class Goal {
     public Goal(int x, int y, boolean isLeftGoal) {
         this.x = x;
         this.y = y;
-        if(isLeftGoal == true){
+        if (isLeftGoal == true) {
             setPic("GoalLeft.png");
-        }
-        else setPic("GoalRight.png");
+        } else setPic("GoalRight.png");
 
     }
 
-    public void draw(Graphics2D g2){
+    public void draw(Graphics2D g2) {
 
-        g2.drawImage(pic, x,y,null);
+        g2.drawImage(pic, x, y, null);
     }
 
 
@@ -35,7 +34,7 @@ public class Goal {
         }
     }
 
-    public boolean contains (int ex, int why){
+    public boolean contains(int ex, int why) {
         Rectangle box = new Rectangle(x, y, pic.getWidth(), pic.getHeight());
         return box.contains(ex, why);
     }
