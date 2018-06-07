@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
  */
 public class Player {
 
-    private int x, y, Radius=50;
+    private int x, y, Radius=50, points1, points;
 
     public Player(int x, int y) {
 
@@ -28,7 +28,7 @@ public class Player {
 
     }
 
-    public void move(int MouseX, int MouseY){
+    public void move(int MouseX, int MouseY, Puck puck){
         if(MouseX > 720+Radius && MouseX < 1340+Radius) {
 
             x = MouseX;
@@ -57,6 +57,34 @@ public class Player {
             y = Radius;
         }
 
+       if(puck.getY() > 162 && puck.getY() < 640 && puck.getX() > 1297){
+
+            points1++;
+
+           puck.setX(720);
+
+           puck.setY(400);
+
+           puck.setYA(0);
+
+           puck.setXA(0);
+
+        }
+
+        if(puck.getY() > 162 && puck.getY() < 640 && puck.getX() <139){
+
+            points++;
+
+            puck.setX(720);
+
+            puck.setY(400);
+
+            puck.setYA(0);
+
+            puck.setXA(0);
+
+        }
+
     }
 
     public Ellipse2D getBounds() {
@@ -74,7 +102,13 @@ public class Player {
     public int getY() {
         return y;
     }
+
     public int getRadius() {
         return Radius;
     }
+
+    public int getPoints1() { return points1; }
+
+    public int getPoints() { return points; }
+
 }

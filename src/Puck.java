@@ -169,4 +169,39 @@ public class Puck {
 
         g.fillOval(collisionPointX, collisionPointY, 5, 5);
     }
+
+    public int getX() {
+
+        return x;
+    }
+
+    public int getY() {
+
+        return y;
+
+    }
+
+    public void setX(int x){
+
+        this.x = x;
+
+    }
+
+    public void setY(int y){
+
+        this.y = y;
+
+    }
+
+    public void setXA(int xa){
+
+        this.xa = xa;
+
+    }
+
+    public void setYA(int ya){
+
+        this.ya = ya;
+
+    }
 }

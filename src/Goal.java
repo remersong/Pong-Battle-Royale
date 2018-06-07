@@ -22,6 +22,7 @@ public class Goal {
     }
 
     public void draw(Graphics2D g2){
+
         g2.drawImage(pic, x,y,null);
     }
 

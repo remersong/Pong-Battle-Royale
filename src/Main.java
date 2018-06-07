@@ -43,6 +43,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
             @Override
             public void mouseDragged(MouseEvent e) {
 
+                System.out.println(e.getX() + " " + e.getY());
+
             }
 
             @Override
@@ -62,8 +64,11 @@ public class Main extends JPanel implements ActionListener, KeyListener{
                         playerspeedx--;
                     }
 
-                System.out.println(playerspeedx+" "+playerspeedy);
-                }
+//                System.out.println(playerspeedx+" "+playerspeedy);
+
+
+
+            }
         });
 
 }
@@ -71,7 +76,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        player.move(MouseX, MouseY);
+        player.move(MouseX, MouseY, puck);
         puck.move(player, playerspeedx, playerspeedy);
 
         repaint();
@@ -120,6 +125,11 @@ public class Main extends JPanel implements ActionListener, KeyListener{
         g2.drawLine(720, 0, 720, 800);
 
         g2.setColor(Color.ORANGE);
+
+        g2.drawString("Points " + player.getPoints(), 100, 100);
+
+        g2.drawString("Points " + player.getPoints1(), 1200, 100);
+
         player.draw(g2);
         puck.draw(g2);
         goal1.draw(g2);
