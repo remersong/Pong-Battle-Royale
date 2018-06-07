@@ -36,8 +36,11 @@ public class Player {
 
     //TODO: implement using an image instead of this rect
     public void draw(Graphics2D g2) {
+        if (you)
+            g2.setColor(new Color(14,0, 230));
+        else
+            g2.setColor(new Color(255,0, 44));
 
-        g2.setColor(Color.ORANGE);
         g2.fillOval(x - Radius, y - Radius, Radius * 2, Radius * 2);
         g2.setColor(new Color(186, 0, 180));
         g2.fillOval(x, y, 5, 5);
@@ -47,6 +50,7 @@ public class Player {
     public void move(int MouseX, int MouseY, Puck puck, int psx, int psy) {
         playerspeedx=psx;
         playerspeedy=psy;
+
         if (MouseX > 720 + Radius && MouseX < 1340 + Radius) {
 
             x = MouseX;
@@ -72,7 +76,9 @@ public class Player {
 
             y = Radius;
         }
-
+        if (!you){
+            x=MouseX;
+        }
 
 
 

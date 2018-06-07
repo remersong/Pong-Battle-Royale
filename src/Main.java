@@ -20,6 +20,11 @@ public class Main extends JPanel implements ActionListener, KeyListener {
     private int puckweight = 6;
     private int time = 20;
     private Goal goal1, goal2;
+    int botlag=3;
+    int dd=0;
+    int thrust=7;
+
+
     private Player[] players=new Player[2];
 
 
@@ -63,16 +68,16 @@ public class Main extends JPanel implements ActionListener, KeyListener {
                 playerspeedx = (int) (points.get(0).getX() - points.get(points.size() - 1).getX()) / puckweight;
                 playerspeedy = (int) (points.get(0).getY() - points.get(points.size() - 1).getY()) / puckweight;
                 if (playerspeedy > 0 && playerspeedy < 5) {
-                    playerspeedy = 4;
+                    playerspeedy = thrust;
                 }
                 if (playerspeedy < 0 && playerspeedy > -5) {
-                    playerspeedy = -4;
+                    playerspeedy = -thrust;
                 }
                 if (playerspeedx > 0 && playerspeedx < 5) {
-                    playerspeedx = 4;
+                    playerspeedx = thrust;
                 }
                 if (playerspeedx < 0 && playerspeedx > -5) {
-                    playerspeedx = -4;
+                    playerspeedx = -thrust;
                 }
 
 
@@ -87,9 +92,16 @@ public class Main extends JPanel implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        players[0].move(MouseX, MouseY, puck, playerspeedx, playerspeedy);
-        puck.move(players);
-
+        players[0].move(MouseX, MouseY, puck, playerspeedx, playerspeedy); //keep
+        if (dd==botlag) {
+            players[1].move(200, puck.getY(), puck, -30, -5);
+            dd=0;
+        }
+        dd++;
+        puck.move(players); // keep
+        if (puck.getXa()==0 && puck.getX()<720){
+            puck.xa=10;
+        }
 
         repaint();
     }

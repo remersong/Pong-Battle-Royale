@@ -11,7 +11,7 @@ public class Puck {
     int collisionPointX = 0;
     int collisionPointY = 0;
     int puckweight = 70;
-    int maxspeed = 30;
+    int maxspeed = 44;
 
     public Puck(int x, int y, int Width, int Height) {
         this.x = x;
@@ -180,5 +180,13 @@ public class Puck {
 
         this.ya = ya;
 
+    }
+
+    public int getXa() {
+        return xa;
+    }
+
+    public int getYa() {
+        return ya;
     }
 }
