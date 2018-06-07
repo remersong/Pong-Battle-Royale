@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
  */
 public class Player {
 
-    private int x, y, Radius=100;
+    private int x, y, Radius=50;
 
     public Player(int x, int y) {
 
@@ -22,39 +22,39 @@ public class Player {
     public void draw(Graphics2D g2){
 
         g2.setColor(Color.ORANGE);
-
-        g2.fillOval(x, y, Radius, Radius);
+        g2.fillOval(x-Radius, y-Radius, Radius*2, Radius*2);
+        g2.setColor(new Color(186, 0, 180));
+        g2.fillOval(x, y, 5, 5);
 
     }
 
     public void move(int MouseX, int MouseY){
-        if(MouseX > 720 && MouseX < 1340) {
+        if(MouseX > 720+Radius && MouseX < 1340+Radius) {
 
             x = MouseX;
 
-        } else if(MouseX < 720) {
+        } else if(MouseX < 720+Radius) {
 
-            x = 720;
-
+            x = 720+Radius;
         } else {
 
-            x = 1340;
+            x = 1340+Radius;
 
         }
 
-        if(MouseY < 700 && MouseY>0) {
+        if(MouseY < 700+Radius && MouseY>Radius) {
 
             y = MouseY;
 
-        } else if(MouseY > 700){
+        } else if(MouseY > 700+Radius){
 
-            y=700;
+            y=700+Radius;
 
         }
 
-        else if(MouseY<0){
+        else if(MouseY<Radius){
 
-            y = 0;
+            y = Radius;
         }
 
     }

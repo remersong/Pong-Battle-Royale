@@ -18,7 +18,8 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     private ArrayList<Point> points= new ArrayList();
     private int playerspeedx=0;
     private int playerspeedy=0;
-    private int puckweight=12;
+    private int puckweight=6;
+    private int time=20;
 
 
     private boolean[] keys;
@@ -44,10 +45,17 @@ public class Main extends JPanel implements ActionListener, KeyListener{
                     MouseX = e.getX();
                     MouseY = e.getY();
                     points.add(new Point(MouseX, MouseY));
-                    if(points.size()>20)
+                    if(points.size()>time)
                         points.remove(0);
                     playerspeedx=(int)(points.get(0).getX() - points.get(points.size()-1).getX()) / puckweight;
                     playerspeedy=(int)(points.get(0).getY() - points.get(points.size()-1).getY()) / puckweight;
+                    if (playerspeedy==0){
+                        playerspeedy--;
+                    }
+                    if (playerspeedx==0){
+                        playerspeedx--;
+                    }
+
                 System.out.println(playerspeedx+" "+playerspeedy);
                 }
         });
@@ -115,7 +123,7 @@ public class Main extends JPanel implements ActionListener, KeyListener{
     public static void main(String[] args) {
 
 
-        JFrame window = new JFrame("Dodge!");
+        JFrame window = new JFrame("Air Hockey Battle Royale!");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         int w = 1440;
         int h = 800;

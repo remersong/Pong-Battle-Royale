@@ -4,12 +4,14 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JOptionPane;
 
 public class Puck {
-    private static final int Radius = 30;
+    private static final int Radius = 15;
     public int x, y, Width, Height, xa = 0, ya = 0;
     int dc;
-    int friction=20;
+    int air=10;
     int collisionPointX=0;
     int collisionPointY=0;
+    int puckweight=70;
+    int maxspeed=35;
 
     public Puck(int x, int y, int Width, int Height) {
         this.x = x;
@@ -20,10 +22,35 @@ public class Puck {
     }
 
     public void move(Player p, int playerspeedx, int playerspeedy) {
-        x += xa;
-        y += ya;
+        checkCollision(p, playerspeedx, playerspeedy);
+        if (xa>maxspeed){
+            xa=maxspeed;
+        }
+        if (xa<-maxspeed){
+            xa=-maxspeed;
+        }
+        if (ya>maxspeed){
+            ya=maxspeed;
+        }
+        if (ya<-maxspeed){
+            ya=-maxspeed;
+        }
+
+        int a1=Math.abs(p.getX()-(x+xa));
+        int b1=Math.abs(p.getY()-(y+xa));
+        int distance1 = (int)Math.sqrt((a1*a1) + (b1*b1));
+
+
+        if (distance1 > (Radius + p.getRadius()) ) {
+            x += xa;
+            y += ya;
+        }
+        else {
+            x += xa;  //figure out how to prevent ball from going inside circle
+            y += ya;
+        }
         dc++;
-        if (dc==friction){
+        if (dc==air){
             if (xa>0){
                 xa--;
             }
@@ -38,25 +65,72 @@ public class Puck {
             }
             dc=0;
         }
-        if (y < 0) {
+        if (y < Radius) {
+            if (xa>0){
+                xa--;
+            }
+            else if(xa<0){
+                xa++;
+            }
+            if (ya>0){
+                ya--;
+            }
+            else if(ya<0){
+                ya++;
+            }
             y += 5;
             ya = -ya;
         }
         else if (y > Height-Radius) {
+            if (xa>0){
+                xa--;
+            }
+            else if(xa<0){
+                xa++;
+            }
+            if (ya>0){
+                ya--;
+            }
+            else if(ya<0){
+                ya++;
+            }
             y -= 5;
             ya = -ya;
         }
-        if (x < 0) {
+        if (x < Radius) {
+            if (xa>0){
+                xa--;
+            }
+            else if(xa<0){
+                xa++;
+            }
+            if (ya>0){
+                ya--;
+            }
+            else if(ya<0){
+                ya++;
+            }
             x += 5;
             xa = -xa;
         }
         else if (x > Width-Radius) {
+            if (xa>0){
+                xa--;
+            }
+            else if(xa<0){
+                xa++;
+            }
+            if (ya>0){
+                ya--;
+            }
+            else if(ya<0){
+                ya++;
+            }
             x -= 5;
             xa = -xa;
         }
 
 
-        checkCollision(p, playerspeedx, playerspeedy);
     }
 
     public void checkCollision(Player player, int playerspeedx, int playerspeedy) {
@@ -72,21 +146,27 @@ public class Puck {
                 //collision!
                 collisionPointX = ((x * player.getRadius()) + (player.getX() * Radius)) / (Radius + player.getRadius());
                 collisionPointY =  ((y * player.getRadius()) + (player.getY() * Radius)) / (Radius + player.getRadius());
-                xa = (int)-(xa * (Radius-player.getRadius()) + (2 * player.getRadius() * playerspeedx)) / (Radius + player.getRadius()); //use player speed x for player speed
-                ya = (int)-(ya * (Radius-player.getRadius()) + (2 * player.getRadius() * playerspeedy)) / (Radius + player.getRadius()); //use player speed y for player speed
+
+                xa = -(xa * (puckweight-player.getRadius()) + (2 * player.getRadius() * playerspeedx)) / (puckweight + player.getRadius()); //use player speed x for player speed
+                ya = -(ya * (puckweight-player.getRadius()) + (2 * player.getRadius() * playerspeedy)) / (puckweight + player.getRadius()); //use player speed y for player speed
+
+
+
 
                 System.out.println("Collision");
             }
         }
     }
 
-    public Ellipse2D getBounds() {
-        return new Ellipse2D.Float(x, y, Radius, Radius);
-    }
+
 
     public void draw(Graphics g) {
         g.setColor(new Color(39, 149, 186));
-        g.fillOval(x, y, Radius, Radius);
+        g.fillOval(x-Radius, y-Radius, Radius*2, Radius*2);
+        g.setColor(new Color(186, 0, 180));
+        g.fillOval(x, y, 5, 5);
+        g.setColor(new Color(56, 186, 8));
+
         g.fillOval(collisionPointX, collisionPointY, 5, 5);
     }
 }
