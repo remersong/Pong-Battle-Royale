@@ -1,19 +1,35 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Ellipse2D;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.io.*;
 
 /**
  * Created by michael_hopps on 5/29/18.
  */
 public class Player {
 
-    private int x, y, Radius = 50, points1, points, playerspeedx=0,playerspeedy=0;
+    private int x, y, startx, starty, Radius = 50, points1, points, playerspeedx=-10,playerspeedy=0;
+    private boolean you;
 
-    public Player(int x, int y) {
+    public Player(int x, int y, boolean you) {
+        this.you=you;
+        if (you==true) {
+            try {
+                Robot r = new Robot();
+                r.mouseMove(x, y);
 
+            } catch (AWTException e) {
+            }
+        }
         this.x = x;
 
         this.y = y;
+        startx = x;
+
+        starty = y;
 
     }
 
@@ -57,9 +73,23 @@ public class Player {
             y = Radius;
         }
 
+
+
+
+
         if (puck.getY() > 162 && puck.getY() < 640 && puck.getX() > 1297) {
 
             points1++;
+            x=startx;
+            y=starty;
+            try{
+                Robot r = new Robot();
+                r.mouseMove(startx, starty);
+
+            }
+            catch (AWTException e){}
+            x=startx;
+            y=starty;
 
             puck.setX(720);
 
@@ -75,6 +105,18 @@ public class Player {
 
             points++;
 
+            x=startx;
+            y=starty;
+
+            try{
+                Robot r = new Robot();
+                r.mouseMove(startx, starty);
+
+            }
+            catch (AWTException e){}
+            x=startx;
+            y=starty;
+
             puck.setX(720);
 
             puck.setY(400);
@@ -82,6 +124,8 @@ public class Player {
             puck.setYA(0);
 
             puck.setXA(0);
+
+
 
         }
 

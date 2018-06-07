@@ -12,8 +12,8 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 
     private Timer timer;
     private Puck puck;
-    private int MouseX = 1200;
-    private int MouseY = WIDTH / 2;
+    private int MouseX;
+    private int MouseY;
     private ArrayList<Point> points = new ArrayList();
     private int playerspeedx = 0;
     private int playerspeedy = 0;
@@ -27,8 +27,11 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 
 
     public Main(int w, int h) {
-        players[0]=new Player(1200, getHeight() / 2);
-        players[1]=new Player(200, getHeight() / 2);
+
+        players[0]=new Player(1200, h/2, true);
+        players[1]=new Player(200, h/2, false);
+        MouseX=1200;
+        MouseY=h/2;
         setSize(w, h);
         timer = new Timer(1000 / 60, this);
         timer.start();
@@ -37,7 +40,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
         keys = new boolean[256];
         goal1 = new Goal(1440 - 150, 150, false);
         goal2 = new Goal(-30, 150, true);
-
+        players[0].move(1200, h/2, puck, 0, 0);
 
 
 
