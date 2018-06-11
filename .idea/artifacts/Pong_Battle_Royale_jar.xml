@@ -3,6 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/Pong_Battle_Royale_jar</output-path>
     <root id="archive" name="Pong Battle Royale.jar">
       <element id="module-output" name="Pong Battle Royale" />
+      <element id="dir-copy" path="$PROJECT_DIR$/res" />
     </root>
   </artifact>
 </component>

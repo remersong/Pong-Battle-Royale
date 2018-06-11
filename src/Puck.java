@@ -13,6 +13,8 @@ public class Puck {
     int puckweight = 70;
     int maxspeed = 44;
 
+
+
     public Puck(int x, int y, int Width, int Height) {
         this.x = x;
         this.y = y;
@@ -35,9 +37,6 @@ public class Puck {
         if (ya < -maxspeed) {
             ya = -maxspeed;
         }
-
-        x+=xa;
-        y+=ya;
 
         dc++;
         if (dc == air) {
@@ -107,7 +106,8 @@ public class Puck {
             x -= 5;
             xa = -xa;
         }
-
+        x+= xa;
+        y+=ya;
 
     }
 
@@ -126,11 +126,20 @@ public class Puck {
                     collisionPointX = ((x * player.getRadius()) + (player.getX() * Radius)) / (Radius + player.getRadius());
                     collisionPointY = ((y * player.getRadius()) + (player.getY() * Radius)) / (Radius + player.getRadius());
 
+                    //use player speed y for player speed
+                    double dx = collisionPointX-player.getX();
+                    double dy = collisionPointY-player.getY();
+                    double m = Math.sqrt(dx*dx +dy*dy);
+//                        if (collisionPointX < player.getX())
+                    x = (int)(player.getX()+((player.getRadius()+Radius)*dx/m));
+                    y = (int)(player.getY()+((player.getRadius()+Radius)*dy/m));
+
+//                        else
+//                            x= player.getX()+((player.getRadius()+Radius)*((collisionPointX-player.getX())/(m+1))+1);
+
                     xa = -(xa * (puckweight - player.getRadius()) + (2 * player.getRadius() * player.getPlayerspeedx())) / (puckweight + player.getRadius()); //use player speed x for player speed
-                    ya = -(ya * (puckweight - player.getRadius()) + (2 * player.getRadius() * player.getPlayerspeedy())) / (puckweight + player.getRadius()); //use player speed y for player speed
-
-
-                    System.out.println("Collision");
+                    ya = -(ya * (puckweight - player.getRadius()) + (2 * player.getRadius() * player.getPlayerspeedy())) / (puckweight + player.getRadius());
+//                    System.out.println("Collision");
                 }
             }
     }

@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- * Created by michael_hopps on 5/4/18.
+ * Created by rob on 5/4/18.
  */
 public class Main extends JPanel implements ActionListener, KeyListener {
 
@@ -20,7 +20,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
     private int puckweight = 6;
     private int time = 20;
     private Goal goal1, goal2;
-    int botlag=3;
+    int botlag=1;
     int dd=0;
     int thrust=7;
 
@@ -167,6 +167,10 @@ public class Main extends JPanel implements ActionListener, KeyListener {
         puck.draw(g2);
         goal1.draw(g2);
         goal2.draw(g2);
+        g2.setColor(new Color(0x5C6367));
+        g2.setStroke(new BasicStroke(2));
+
+//        g2.drawLine(0, puck.getY(), getWidth(), puck.getY() );
 
 
     }

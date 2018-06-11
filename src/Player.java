@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.io.*;
 
 /**
- * Created by michael_hopps on 5/29/18.
+ * Created by rob on 5/29/18.
  */
 public class Player {
 
@@ -143,6 +143,15 @@ public class Player {
 
         };
 
+    }
+
+    public boolean contains(double x, double y){
+        double dx = x - this.x;
+        double dy = y - this.y;
+        if( dx*dx + dy*dy < getRadius()*getRadius()){
+            return true;
+        }
+        return false;
     }
 
     public int getX() {
