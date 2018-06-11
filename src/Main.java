@@ -152,15 +152,26 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 
         g2.drawOval(getWidth() / 2 - 150, getHeight() / 2 - 150, 300, 300);
 
-        g2.setStroke(new BasicStroke(6));
+        g2.setStroke(new BasicStroke(12));
 
         g2.drawLine(720, 0, 720, 800);
 
         g2.setColor(Color.ORANGE);
 
+        g2.setFont(new Font("Times new roman", Font.PLAIN, 44));
+
         g2.drawString("Points " + players[0].getPoints(), 1200, 100);
 
         g2.drawString("Points " + players[0].getPoints1(), 100, 100);
+
+        g2.setColor(Color.BLUE);
+
+        if (players[0].getPoints() > players[0].getPoints1()){
+            g2.drawRect(1100, 100, 20, 20);
+        }
+        else if (players[0].getPoints() < players[0].getPoints1()){
+            g2.drawRect(250, 75, 20, 20);
+        }
 
         players[0].draw(g2);
         players[1].draw(g2);

@@ -34,6 +34,8 @@ public class Player {
     }
 
 
+
+
     //TODO: implement using an image instead of this rect
     public void draw(Graphics2D g2) {
         if (you)
