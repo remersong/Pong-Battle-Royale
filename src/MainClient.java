@@ -3,12 +3,17 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * Created by rob on 5/4/18.
  */
-public class Main extends JPanel implements ActionListener, KeyListener {
+public class MainClient extends JPanel implements ActionListener, KeyListener {
 
     private Timer timer;
     private Puck puck;
@@ -20,23 +25,25 @@ public class Main extends JPanel implements ActionListener, KeyListener {
     private int puckweight = 6;
     private int time = 20;
     private Goal goal1, goal2;
-    int botlag=1;
-    int dd=0;
-    int thrust=7;
-
-
-    private Player[] players=new Player[2];
+    int botlag = 1;
+    int dd = 0;
+    int thrust = 7;
+    private int port = 5555;
+    private Player[] players = new Player[2];
+    private int[] mycoords = new int[4];
+    private int[] theircoords = new int[4];
+    private Socket host = new Socket("192.168.1.190", port);
 
 
     private boolean[] keys;
 
 
-    public Main(int w, int h) {
+    public MainClient(int w, int h) throws IOException {
 
-        players[0]=new Player(1200, h/2, true, 1);
-        players[1]=new Player(200, h/2, false, 2);
-        MouseX=1200;
-        MouseY=h/2;
+        players[0] = new Player(1200, h / 2, false, 1);
+        players[1] = new Player(200, h / 2, true, 2);
+        MouseX = 1200;
+        MouseY = h / 2;
         setSize(w, h);
         timer = new Timer(1000 / 60, this);
         timer.start();
@@ -45,9 +52,7 @@ public class Main extends JPanel implements ActionListener, KeyListener {
         keys = new boolean[256];
         goal1 = new Goal(1440 - 150, 150, false);
         goal2 = new Goal(-30, 150, true);
-        players[0].move(1200, h/2, puck, 0, 0);
-
-
+        players[0].move(1200, h / 2, puck, 0, 0);
 
         addMouseMotionListener(new MouseMotionListener() {
             @Override
@@ -83,27 +88,36 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 
 //                System.out.println(playerspeedx+" "+playerspeedy);
 
-
             }
         });
+
+//        while (host.getLocalSocketAddress()!=)
+        System.out.println("Connected to: " + host.getLocalSocketAddress());
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        players[0].move(MouseX, MouseY, puck, playerspeedx, playerspeedy); //keep
-        if (dd==botlag) {
-            players[1].move(200, puck.getY(), puck, -30, -5);
-            dd=0;
-        }
-        dd++;
-        puck.move(players); // keep
-        if (puck.getXa()==0 && puck.getX()<720){
-            puck.xa=10;
+        try {
+            transfer();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
 
+        players[0].move(theircoords[0], theircoords[1], puck, theircoords[2], theircoords[3]); //keep
+        players[1].move(MouseX, MouseY, puck, playerspeedx, playerspeedy);
+
+        dd++;
+        puck.move(players); // keep
+        if (puck.getXa() == 0 && puck.getX() < 720) {
+            puck.xa = 10;
+        }
         repaint();
+        mycoords[0] = players[1].getX();
+        mycoords[1] = players[1].getY();
+        mycoords[2] = players[1].getPlayerspeedx();
+        mycoords[3] = players[1].getPlayerspeedy();
     }
 
     @Override
@@ -121,6 +135,26 @@ public class Main extends JPanel implements ActionListener, KeyListener {
             keyEvent.consume();
 
     }
+
+    public void transfer() throws IOException {
+        if (host.getInputStream() != null) {
+            OutputStream socketStream;
+            ObjectOutputStream objectOutput;
+//            System.out.println("Connection established with client: " + client.getInetAddress().getHostAddress());
+            socketStream = host.getOutputStream();
+            objectOutput = new ObjectOutputStream(socketStream);
+            objectOutput.writeObject(mycoords);
+            try {
+                ObjectInputStream ois = new ObjectInputStream(host.getInputStream());
+                theircoords=(int[]) ois.readObject();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+//    }
 
     @Override
     public void keyReleased(KeyEvent keyEvent) {
@@ -166,10 +200,9 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 
         g2.setColor(Color.BLUE);
 
-        if (players[0].getPoints() > players[0].getPoints1()){
+        if (players[0].getPoints() > players[0].getPoints1()) {
             g2.drawRect(1100, 100, 20, 20);
-        }
-        else if (players[0].getPoints() < players[0].getPoints1()){
+        } else if (players[0].getPoints() < players[0].getPoints1()) {
             g2.drawRect(250, 75, 20, 20);
         }
 
@@ -186,16 +219,15 @@ public class Main extends JPanel implements ActionListener, KeyListener {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownHostException, IOException {
 
-
-        JFrame window = new JFrame("Air Hockey Battle Royale!");
+        JFrame window = new JFrame("Air Hockey Battle Royale! CLIENT");
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         int w = 1440;
         int h = 800;
         window.setBounds(0, 0, w, h + 22); //(x, y, w, h) 22 due to title bar.
 
-        JPanel panel = new Main(w, h);
+        JPanel panel = new MainClient(w, h);
 
         panel.setFocusable(true);
         panel.grabFocus();

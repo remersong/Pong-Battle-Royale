@@ -11,21 +11,22 @@ import java.io.*;
  */
 public class Player {
 
-    private int x, y, startx, starty, Radius = 50, points1, points, playerspeedx=-10,playerspeedy=0;
+    private int x, y, startx, starty, Radius = 60, points1, points, playerspeedx=-10,playerspeedy=0;
+    private int player;
     private boolean you;
 
-    public Player(int x, int y, boolean you) {
+    public Player(int x, int y, boolean you, int player) {
         this.you=you;
-        if (you==true) {
-            try {
-                Robot r = new Robot();
-                r.mouseMove(x, y);
-
-            } catch (AWTException e) {
-            }
-        }
+//        if (you==true) {
+//            try {
+//                Robot r = new Robot();
+//                r.mouseMove(x, y);
+//
+//            } catch (AWTException e) {
+//            }
+//        }
         this.x = x;
-
+        this.player=player;
         this.y = y;
         startx = x;
 
@@ -52,18 +53,31 @@ public class Player {
     public void move(int MouseX, int MouseY, Puck puck, int psx, int psy) {
         playerspeedx=psx;
         playerspeedy=psy;
+        if (player==1) {
+            if (MouseX > 720 + Radius && MouseX < 1340 + Radius) {
 
-        if (MouseX > 720 + Radius && MouseX < 1340 + Radius) {
+                x = MouseX;
+            } else if (MouseX < 720 + Radius + 1) {
 
-            x = MouseX;
+                x = 720 + Radius;
+            } else {
 
-        } else if (MouseX < 720 + Radius + 1) {
+                x = 1340 + Radius;
 
-            x = 720 + Radius;
-        } else {
+            }
+        }
+        if (player==2) {
 
-            x = 1340 + Radius;
+            if (MouseX < 720 - Radius && MouseX > 0) {
+                x = MouseX;
+            } else if (MouseX > 720 - Radius - 1) {
 
+                x = 720 - Radius;
+            } else {
+
+                x = 0;
+
+            }
         }
 
         if (MouseY < 700 + Radius && MouseY > Radius) {
@@ -90,12 +104,14 @@ public class Player {
             points1++;
             x=startx;
             y=starty;
-            try{
-                Robot r = new Robot();
-                r.mouseMove(startx, starty);
+//            try{
+//                Robot r = new Robot();
+//                r.mouseMove(startx, starty);
+//
+//            }
+//            catch (AWTException e){}
 
-            }
-            catch (AWTException e){}
+            // no robots when testing
             x=startx;
             y=starty;
 
@@ -116,12 +132,12 @@ public class Player {
             x=startx;
             y=starty;
 
-            try{
-                Robot r = new Robot();
-                r.mouseMove(startx, starty);
-
-            }
-            catch (AWTException e){}
+//            try{
+//                Robot r = new Robot();
+//                r.mouseMove(startx, starty);
+//
+//            }
+//            catch (AWTException e){}
             x=startx;
             y=starty;
 
