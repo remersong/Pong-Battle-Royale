@@ -31,7 +31,7 @@ public class MainHost extends JPanel implements ActionListener, KeyListener {
     private int port = 5555;
     private java.util.List<PrintStream> clients;
     private Player[] players = new Player[2];
-    private int[] mycoords = new int[4];
+    private int[] mycoords = new int[8];
     private int[] theircoords = new int[4];
     ServerSocket server;
     Boolean connected = false;
@@ -121,6 +121,11 @@ public class MainHost extends JPanel implements ActionListener, KeyListener {
             mycoords[1] = players[0].getY();
             mycoords[2] = players[0].getPlayerspeedx();
             mycoords[3] = players[0].getPlayerspeedy();
+            mycoords[4]=puck.getX();
+            mycoords[5]=puck.getY();
+            mycoords[6]=puck.getXa();
+            mycoords[7]=puck.getYa();
+
             if (server != null && !server.toString().equals("ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5555]"))
                 System.out.println("Connection from: " + server.toString());
 

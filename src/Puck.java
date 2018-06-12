@@ -110,6 +110,12 @@ public class Puck {
         y+=ya;
 
     }
+    public void move(int x, int y, int xa, int ya){
+        this.x=x;
+        this.y=y;
+        this.xa=xa;
+        this.ya=ya;
+    }
 
     public void checkCollision( Player[] players) {
         for (Player player : players){

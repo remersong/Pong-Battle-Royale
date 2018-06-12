@@ -31,7 +31,7 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
     private int port = 5555;
     private Player[] players = new Player[2];
     private int[] mycoords = new int[4];
-    private int[] theircoords = new int[4];
+    private int[] theircoords = new int[8];
     private Socket host = new Socket("192.168.1.190", port);
 
 
@@ -107,7 +107,7 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
 
         players[0].move(theircoords[0], theircoords[1], puck, theircoords[2], theircoords[3]); //keep
         players[1].move(MouseX, MouseY, puck, playerspeedx, playerspeedy);
-
+        puck.move(theircoords[4],theircoords[5],theircoords[6],theircoords[7] );
         dd++;
         puck.move(players); // keep
         if (puck.getXa() == 0 && puck.getX() < 720) {
