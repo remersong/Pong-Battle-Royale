@@ -104,7 +104,7 @@ public class Player {
             points1++;
             x=startx;
             y=starty;
-            if (you == true) {
+//            if (you == true) {
 
                 try {
                     Robot r = new Robot();
@@ -112,7 +112,7 @@ public class Player {
 
                 } catch (AWTException e) {
                 }
-            }
+//            }
             // no robots when testing
             x=startx;
             y=starty;
@@ -133,14 +133,14 @@ public class Player {
 
             x = startx;
             y = starty;
-            if (you == true){
+//            if (you == true){
                 try {
                     Robot r = new Robot();
                     r.mouseMove(startx, starty);
 
                 } catch (AWTException e) {
                 }
-        }
+//        }
             x=startx;
             y=starty;
 
