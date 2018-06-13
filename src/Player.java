@@ -17,14 +17,14 @@ public class Player {
 
     public Player(int x, int y, boolean you, int player) {
         this.you=you;
-//        if (you==true) {
-//            try {
-//                Robot r = new Robot();
-//                r.mouseMove(x, y);
-//
-//            } catch (AWTException e) {
-//            }
-//        }
+        if (you==true) {
+            try {
+                Robot r = new Robot();
+                r.mouseMove(x, y);
+
+            } catch (AWTException e) {
+            }
+        }
         this.x = x;
         this.player=player;
         this.y = y;
@@ -104,13 +104,15 @@ public class Player {
             points1++;
             x=startx;
             y=starty;
-//            try{
-//                Robot r = new Robot();
-//                r.mouseMove(startx, starty);
-//
-//            }
-//            catch (AWTException e){}
+            if (you == true) {
 
+                try {
+                    Robot r = new Robot();
+                    r.mouseMove(startx, starty);
+
+                } catch (AWTException e) {
+                }
+            }
             // no robots when testing
             x=startx;
             y=starty;
@@ -129,15 +131,16 @@ public class Player {
 
             points++;
 
-            x=startx;
-            y=starty;
+            x = startx;
+            y = starty;
+            if (you == true){
+                try {
+                    Robot r = new Robot();
+                    r.mouseMove(startx, starty);
 
-//            try{
-//                Robot r = new Robot();
-//                r.mouseMove(startx, starty);
-//
-//            }
-//            catch (AWTException e){}
+                } catch (AWTException e) {
+                }
+        }
             x=startx;
             y=starty;
 

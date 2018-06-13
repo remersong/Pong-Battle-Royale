@@ -113,9 +113,9 @@ public class MainHost extends JPanel implements ActionListener, KeyListener {
             players[0].move(MouseX, MouseY, puck, playerspeedx, playerspeedy); //keep
             players[1].move(theircoords[0], theircoords[1], puck, theircoords[2], theircoords[3]);
             puck.move(players); // keep
-            if (puck.getXa() == 0 && puck.getX() < 720) {
-                puck.xa = 10;
-            }
+//            if (puck.getXa() == 0 && puck.getX() < 720) {
+//                puck.xa = 10;
+//            }
             repaint();
             mycoords[0] = players[0].getX();
             mycoords[1] = players[0].getY();
