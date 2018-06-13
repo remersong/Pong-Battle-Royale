@@ -32,7 +32,8 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
     private Player[] players = new Player[2];
     private int[] mycoords = new int[4];
     private int[] theircoords = new int[8];
-    private Socket host = new Socket("172.20.10.3", port);
+    String IP="172.20.10.3";
+    private Socket host = new Socket(IP, port);
 
 
     private boolean[] keys;
