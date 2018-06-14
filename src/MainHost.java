@@ -128,8 +128,6 @@ public class MainHost extends JPanel implements ActionListener, KeyListener {
             mycoords[8]=players[0].getPoints();
             mycoords[9]=players[0].getPoints1();
 
-
-
             if (server != null && !server.toString().equals("ServerSocket[addr=0.0.0.0/0.0.0.0,localport=5555]"))
                 System.out.println("Connection from: " + server.toString());
 

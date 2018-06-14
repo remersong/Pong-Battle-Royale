@@ -119,8 +119,8 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
         mycoords[1] = players[1].getY();
         mycoords[2] = players[1].getPlayerspeedx();
         mycoords[3] = players[1].getPlayerspeedy();
-        players[0].setPoints(mycoords[8]);
-        players[0].setPoints(mycoords[9]);
+        players[0].setPoints(theircoords[8]);
+        players[0].setPoints1(theircoords[9]);
 
 
     }
@@ -204,7 +204,6 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
         g2.drawString("Points " + players[0].getPoints1(), 100, 100);
 
         g2.setColor(Color.BLUE);
-
         if (players[0].getPoints() > players[0].getPoints1()) {
             g2.drawRect(1100, 100, 20, 20);
         } else if (players[0].getPoints() < players[0].getPoints1()) {
