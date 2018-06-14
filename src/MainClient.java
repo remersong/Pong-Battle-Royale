@@ -32,7 +32,7 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
     private Player[] players = new Player[2];
     private int[] mycoords = new int[4];
     private int[] theircoords = new int[8];
-    String IP="172.20.10.3";
+    String IP="10.0.44.133";
     private Socket host = new Socket(IP, port);
 
 
@@ -147,7 +147,7 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
             objectOutput.writeObject(mycoords);
             try {
                 ObjectInputStream ois = new ObjectInputStream(host.getInputStream());
-                theircoords=(int[]) ois.readObject();
+                theircoords = (int[])ois.readObject();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }

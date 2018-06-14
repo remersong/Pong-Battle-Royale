@@ -167,10 +167,10 @@ public class Main extends JPanel implements ActionListener, KeyListener {
         g2.setColor(Color.BLUE);
 
         if (players[0].getPoints() > players[0].getPoints1()){
-            g2.drawRect(1100, 100, 20, 20);
+            g2.drawRect(1200, 50, 20, 20);
         }
         else if (players[0].getPoints() < players[0].getPoints1()){
-            g2.drawRect(250, 75, 20, 20);
+            g2.drawRect(350, 75, 20, 20);
         }
 
         players[0].draw(g2);
