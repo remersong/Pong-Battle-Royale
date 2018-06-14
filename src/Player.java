@@ -12,7 +12,7 @@ import java.io.*;
 public class Player {
 
     private int x, y, startx, starty, Radius = 60, points1, points, playerspeedx=-10,playerspeedy=0;
-    private int player;
+    private int playerno;
     private boolean you;
 
     public Player(int x, int y, boolean you, int player) {
@@ -26,7 +26,7 @@ public class Player {
             }
         }
         this.x = x;
-        this.player=player;
+        this.playerno=player;
         this.y = y;
         startx = x;
 
@@ -51,9 +51,10 @@ public class Player {
     }
 
     public void move(int MouseX, int MouseY, Puck puck, int psx, int psy) {
+
         playerspeedx=psx;
         playerspeedy=psy;
-        if (player==1) {
+        if (playerno==1) {
             if (MouseX > 720 + Radius && MouseX < 1340 + Radius) {
 
                 x = MouseX;
@@ -66,7 +67,7 @@ public class Player {
 
             }
         }
-        if (player==2) {
+        if (playerno==2) {
 
             if (MouseX < 720 - Radius && MouseX > 0) {
                 x = MouseX;
@@ -100,11 +101,12 @@ public class Player {
 
 
         if (puck.getY() > 162 && puck.getY() < 640 && puck.getX() > 1297) {
-
+            System.out.println(playerno + " " + you);
             points1++;
             x=startx;
             y=starty;
-//            if (you == true) {
+            if (you == true){
+                System.out.println("Yeeti" + playerno);
 
                 try {
                     Robot r = new Robot();
@@ -112,7 +114,7 @@ public class Player {
 
                 } catch (AWTException e) {
                 }
-//            }
+            }
             // no robots when testing
             x=startx;
             y=starty;
@@ -128,19 +130,21 @@ public class Player {
         }
 
         if (puck.getY() > 162 && puck.getY() < 640 && puck.getX() < 139) {
+            System.out.println(playerno + " " + you);
 
             points++;
 
             x = startx;
             y = starty;
-//            if (you == true){
+            if (you == true){
+                System.out.println("Yeeti" + playerno);
                 try {
                     Robot r = new Robot();
                     r.mouseMove(startx, starty);
 
                 } catch (AWTException e) {
                 }
-//        }
+        }
             x=startx;
             y=starty;
 
@@ -193,6 +197,14 @@ public class Player {
 
     public int getPoints() {
         return points;
+    }
+
+    public void setPoints1(int p) {
+         points1=p;
+    }
+
+    public void setPoints(int p) {
+        points=p;
     }
 
     public int getPlayerspeedx() {
