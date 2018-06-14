@@ -119,6 +119,10 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
         mycoords[1] = players[1].getY();
         mycoords[2] = players[1].getPlayerspeedx();
         mycoords[3] = players[1].getPlayerspeedy();
+        players[0].setPoints(mycoords[8]);
+        players[0].setPoints(mycoords[9]);
+
+
     }
 
     @Override
