@@ -28,11 +28,10 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
     int botlag = 1;
     int dd = 0;
     int thrust = 7;
-
     private int port = 5555;
     private Player[] players = new Player[2];
     private int[] mycoords = new int[4];
-    private int[] theircoords = new int[10];
+    private int[] theircoords = new int[8];
     String IP="10.0.44.133";
     private Socket host = new Socket(IP, port);
 
@@ -120,10 +119,6 @@ public class MainClient extends JPanel implements ActionListener, KeyListener {
         mycoords[1] = players[1].getY();
         mycoords[2] = players[1].getPlayerspeedx();
         mycoords[3] = players[1].getPlayerspeedy();
-        players[0].setPoints(theircoords[8]);
-        players[0].setPoints(theircoords[9]);
-
-
     }
 
     @Override
